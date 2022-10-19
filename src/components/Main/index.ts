@@ -1,3 +1,3 @@
-export { default as Login } from './Login/Login';
-export { default as Signup } from './Signup/Signup';
 export { default as Main } from './Main';
+
+export * from './Todo';

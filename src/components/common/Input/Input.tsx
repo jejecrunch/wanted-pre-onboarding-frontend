@@ -6,8 +6,10 @@ type InputParam = {
   param: {
     value: string | undefined;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    check: boolean;
+    type: string;
+    name: string;
   };
+  valid: boolean;
   errMsg: string;
 };
 
@@ -15,6 +17,7 @@ export default function Input({
   label,
   placeholder,
   param,
+  valid,
   errMsg,
 }: InputParam) {
   return (
@@ -25,7 +28,7 @@ export default function Input({
         className="form-control mt-1"
         {...param}
       />
-      {!param.check ? <p className="errMsg">{errMsg}</p> : <></>}
+      {!valid ? <p className="errMsg">{errMsg}</p> : <></>}
     </div>
   );
 }

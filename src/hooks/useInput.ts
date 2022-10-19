@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 type UseInputParam = {
-  initVal: string | undefined;
-  validation: (v: string) => boolean;
+  initVal: string | '';
+  validation: (v: string) => boolean | never;
 };
 
 export default function useInput({ initVal, validation }: UseInputParam) {
   const [value, setValue] = useState(initVal);
-  const [check, setCheck] = useState(true);
+  const [valid, setValid] = useState(true);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const {
@@ -15,10 +15,8 @@ export default function useInput({ initVal, validation }: UseInputParam) {
     } = e;
 
     setValue(value);
-
-    if (validation(value)) setCheck(true);
-    else setCheck(false);
+    setValid(validation(value));
   }
 
-  return { value, onChange, check };
+  return { value, onChange, valid };
 }

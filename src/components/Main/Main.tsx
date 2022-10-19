@@ -1,17 +1,124 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Main.scss';
-import { Login, Signup } from '.';
+import storage from '../services/store';
+import { useNavigate } from 'react-router-dom';
+import { useInput } from '../../hooks';
+import { login, signup } from '../services';
+import { Button, Input } from '../common';
 
 export default function Main() {
   const [mode, setMode] = useState('login');
+  const [token] = useState(storage.get('token'));
+
+  const [email, pw, checkPw] = [
+    useInput({
+      initVal: '',
+      validation: v => v.indexOf('@') > -1,
+    }),
+    useInput({ initVal: '', validation: v => v.length >= 8 }),
+    useInput({
+      initVal: '',
+      validation: v => v === pw.value,
+    }),
+  ];
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate('/todo');
+    } else {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const changeMode = () => {
     setMode(mode === 'login' ? 'signup' : 'login');
   };
 
-  return mode === 'login' ? (
-    <Login changeMode={changeMode} />
-  ) : (
-    <Signup changeMode={changeMode} />
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (mode === 'login') {
+      const res = await login({ email: email.value, password: pw.value });
+
+      if (res.status === 200) {
+        storage.set('token', res.data.access_token);
+        navigate('/todo');
+      } else {
+        alert('로그인에 실패했어요');
+      }
+    } else {
+      const res = await signup({ email: email.value, password: pw.value });
+
+      if (res.status === 201) {
+        alert('회원가입 성공');
+      } else {
+        alert('다시 시도하세요');
+      }
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-content">
+          <h3 className="form-title">
+            {mode === 'login' ? '로그인' : '회원가입'}
+          </h3>
+          <div className="text-center">
+            {mode === 'login'
+              ? '아직 가입하지 않으셨다면 '
+              : '이미 가입했던 적이 있다면 '}
+            <span className="link-primary" onClick={changeMode}>
+              {mode === 'login' ? '회원가입' : '로그인'}
+            </span>
+          </div>
+          <Input
+            label="이메일"
+            placeholder="이메일을 입력해주세요"
+            param={{
+              value: email.value,
+              onChange: email.onChange,
+              type: 'email',
+              name: 'email',
+            }}
+            valid={email.valid}
+            errMsg="@ 포함해서 입력해주세요"
+          />
+
+          <Input
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
+            param={{
+              value: pw.value,
+              onChange: pw.onChange,
+              type: 'password',
+              name: '',
+            }}
+            valid={pw.valid}
+            errMsg="8자 이상 입력해주세요"
+          />
+
+          {mode === 'login' ? (
+            <></>
+          ) : (
+            <Input
+              label="비밀번호 확인"
+              placeholder="비밀번호를 한번 더 입력해주세요"
+              param={{
+                value: checkPw.value,
+                onChange: checkPw.onChange,
+                type: 'password',
+                name: 'password',
+              }}
+              valid={checkPw.valid}
+              errMsg="입력하신 비밀번호와 다릅니다"
+            />
+          )}
+
+          <Button>{mode === 'login' ? '로그인' : '가입'}</Button>
+        </div>
+      </form>
+    </div>
   );
 }
