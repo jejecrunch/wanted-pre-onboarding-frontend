@@ -18,6 +18,7 @@ module.exports = {
         singleQuote: true,
         semi: true,
         useTabs: false,
+        endOfLine: 'auto',
         tabWidth: 2,
         printWidth: 80,
         bracketSpacing: true,
