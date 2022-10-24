@@ -1,23 +1,20 @@
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Main, Todo } from './components';
 import reportWebVitals from './reportWebVitals';
-import React from 'react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/todo" element={<Todo />}></Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <HashRouter basename={process.env.PUBLIC_URL}>
+    <Routes>
+      <Route path="/" element={<Main />}></Route>
+      <Route path="/todo" element={<Todo />}></Route>
+    </Routes>
+  </HashRouter>
 );
 
 reportWebVitals();
