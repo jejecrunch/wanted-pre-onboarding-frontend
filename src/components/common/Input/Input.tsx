@@ -21,13 +21,21 @@ export default function Input({
   errMsg,
 }: InputParam) {
   return (
-    <div className="form-group mt-3">
-      <label>{label}</label>
+    <div
+      className={
+        param.name === 'newTodo'
+          ? 'form-outline flex-fill justify-content-center'
+          : 'form-group mt-3'
+      }
+    >
+      {param.name === 'newTodo' ? <></> : <label>{label}</label>}
       <input
+        id={param.name === 'newTodo' ? 'todo' : ''}
         placeholder={placeholder}
-        className="form-control mt-1"
+        className="form-control"
         {...param}
       />
+      {param.name === 'newTodo' ? <label>{label}</label> : <></>}
       {!valid ? <p className="errMsg">{errMsg}</p> : <></>}
     </div>
   );

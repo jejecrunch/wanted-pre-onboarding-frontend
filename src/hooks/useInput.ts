@@ -18,5 +18,9 @@ export default function useInput({ initVal, validation }: UseInputParam) {
     setValid(validation(value));
   }
 
-  return { value, onChange, valid };
+  function onReset() {
+    setValue('');
+  }
+
+  return { value, onChange, valid, onReset };
 }

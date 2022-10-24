@@ -93,7 +93,7 @@ export default function Main() {
               value: pw.value,
               onChange: pw.onChange,
               type: 'password',
-              name: '',
+              name: 'prepassword',
             }}
             valid={pw.valid}
             errMsg="8자 이상 입력해주세요"
@@ -116,7 +116,9 @@ export default function Main() {
             />
           )}
 
-          <Button>{mode === 'login' ? '로그인' : '가입'}</Button>
+          <Button type="user" onClick={undefined}>
+            {mode === 'login' ? '로그인' : '가입'}
+          </Button>
         </div>
       </form>
     </div>
