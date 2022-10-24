@@ -1,5 +1,7 @@
 name: Build and Deploy
-on: [push]
+on:
+  push:
+    branches: [release]
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
@@ -10,7 +12,8 @@ jobs:
             - name: Install and Build
               run: |
                   npm install
-                  npm run build
+                  PUBLIC_URL=. npm run build
+
             - name: Deploy Build Files
               env:
                   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
