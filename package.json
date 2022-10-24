@@ -53,5 +53,5 @@
     "prettier": "^2.7.1",
     "sass-loader": "^13.1.0"
   },
-  "homepage": "/wanted-pre-onboarding-frontend"
+  "homepage": "."
 }
