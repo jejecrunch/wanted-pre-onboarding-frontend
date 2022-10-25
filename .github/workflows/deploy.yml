@@ -11,7 +11,7 @@ jobs:
 
             - name: Generate Environment Variables File for Production
               run: |
-                  echo "REACT_APP_URL=$REACT_APP_DOMAIN" >> .env
+                  echo "REACT_APP_URL=$REACT_APP_URL" >> .env
               env:
                 REACT_APP_URL: ${{ secrets.REACT_APP_URL }}
 
