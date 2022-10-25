@@ -7,6 +7,7 @@ type TodoNavParam = {
 
 export function TodoNav({ todos, setTodos }: TodoNavParam) {
   const base = [...todos];
+
   const [tabs] = useState([
     {
       name: 'All',
@@ -24,7 +25,7 @@ export function TodoNav({ todos, setTodos }: TodoNavParam) {
     {
       name: 'Active',
       onClick: () => {
-        setTodos([...base.filter(v => !v.isCompleted)]);
+        setTodos(base.filter(v => !v.isCompleted));
         tabs[1].active = !tabs[1].active;
 
         if (tabs[1].active) {
@@ -37,7 +38,7 @@ export function TodoNav({ todos, setTodos }: TodoNavParam) {
     {
       name: 'Completed',
       onClick: () => {
-        setTodos([...base.filter(v => v.isCompleted)]);
+        setTodos(base.filter(v => v.isCompleted));
         tabs[2].active = !tabs[2].active;
 
         if (tabs[2].active) {

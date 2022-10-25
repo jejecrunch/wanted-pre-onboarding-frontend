@@ -30,7 +30,7 @@ export default function Input({
     >
       {param.name === 'newTodo' ? <></> : <label>{label}</label>}
       <input
-        id={param.name === 'newTodo' ? 'todo' : ''}
+        id={param.name === 'newTodo' ? 'todo' : param.name}
         placeholder={placeholder}
         className="form-control"
         {...param}
