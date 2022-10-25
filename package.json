@@ -73,7 +73,7 @@
     "test": "node scripts/test.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "deploy": "gh-pages -b release -d build"
+    "product:start": "npm run build && npx serve -s build"
   },
   "homepage": "https://jejecrunch.github.io/wanted-pre-onboarding-frontend",
   "eslintConfig": {
