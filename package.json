@@ -75,7 +75,7 @@
     "lint:fix": "eslint --fix ./src",
     "deploy": "gh-pages -b release -d build"
   },
-  "homepage": "https://github.com/jejecrunch/wanted-pre-onboarding-frontend/tree/gh-pages",
+  "homepage": "https://jejecrunch.github.io/wanted-pre-onboarding-frontend",
   "eslintConfig": {
     "extends": [
       "react-app",
