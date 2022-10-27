@@ -4,7 +4,7 @@ type InputParam = {
   label: string;
   placeholder: string;
   param: {
-    value: string | undefined;
+    value: string | '';
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     type: string;
     name: string;

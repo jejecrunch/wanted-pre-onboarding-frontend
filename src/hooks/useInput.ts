@@ -7,7 +7,7 @@ type UseInputParam = {
 
 export default function useInput({ initVal, validation }: UseInputParam) {
   const [value, setValue] = useState(initVal);
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState(false);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     const {

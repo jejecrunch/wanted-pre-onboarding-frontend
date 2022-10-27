@@ -79,23 +79,31 @@ export function TodoItem({ todo, index, todos, setTodos }: TodoItemParam) {
             valid={newTodo !== null}
             errMsg=""
           />
-          <Button type="todo cancel" onClick={() => setIsEdit(!isEdit)}>
+          <Button
+            type="todo cancel"
+            onClick={() => setIsEdit(!isEdit)}
+            disabled={false}
+          >
             취소
           </Button>
-          <Button type="todo modify" onClick={handleUpdate}>
+          <Button type="todo modify" onClick={handleUpdate} disabled={false}>
             수정
           </Button>
         </>
       ) : (
         <>
           {newTodo.isCompleted ? <s>{newTodo.todo}</s> : newTodo.todo}{' '}
-          <Button type="todo modify" onClick={() => setIsEdit(!isEdit)}>
+          <Button
+            type="todo modify"
+            onClick={() => setIsEdit(!isEdit)}
+            disabled={false}
+          >
             수정
           </Button>
         </>
       )}
 
-      <Button type="todo delete" onClick={handleDelete}>
+      <Button type="todo delete" onClick={handleDelete} disabled={false}>
         삭제
       </Button>
     </li>

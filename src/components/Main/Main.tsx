@@ -34,6 +34,9 @@ export default function Main() {
 
   const changeMode = () => {
     setMode(mode === 'login' ? 'signup' : 'login');
+    email.value = '';
+    pw.value = '';
+    checkPw.value = '';
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,7 +119,18 @@ export default function Main() {
             />
           )}
 
-          <Button type="user" onClick={undefined}>
+          <Button
+            type="user"
+            onClick={undefined}
+            disabled={
+              mode === 'login'
+                ? (email.value.length === 0 && !email.valid) ||
+                  (pw.value.length === 0 && !pw.valid)
+                : (email.value.length === 0 && !email.valid) ||
+                  (pw.value.length === 0 && !pw.valid) ||
+                  (checkPw.value.length === 0 && !checkPw.valid)
+            }
+          >
             {mode === 'login' ? '로그인' : '가입'}
           </Button>
         </div>

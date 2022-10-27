@@ -39,16 +39,20 @@ export default function Todo() {
           <div className="col col-xl-10">
             <div className="card">
               <div className="card-body p-5">
-                <Button
-                  type="logout"
-                  onClick={() => {
-                    alert('로그아웃하시겠습니까?');
-                    storage.remove('token');
-                    navigate('/');
-                  }}
-                >
-                  Logout
-                </Button>
+                <div className="d-grid gap-2 mt-3 mb-3 justify-content-end">
+                  <Button
+                    type="logout"
+                    onClick={() => {
+                      console.log('!!!');
+                      confirm('로그아웃하시겠습니까?');
+                      storage.remove('token');
+                      navigate('/');
+                    }}
+                    disabled={false}
+                  >
+                    Logout
+                  </Button>
+                </div>
                 <TodoForm todos={todos} setTodos={setTodos} />
                 <TodoNav todos={todos} setTodos={setTodos} />
                 <TodoList todos={todos} setTodos={setTodos} />

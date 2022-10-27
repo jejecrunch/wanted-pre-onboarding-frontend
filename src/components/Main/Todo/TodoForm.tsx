@@ -44,7 +44,7 @@ export function TodoForm({ todos, setTodos }: TodoFormParam) {
         errMsg=""
       />
 
-      <Button type="todo" onClick={undefined}>
+      <Button type="todo" onClick={undefined} disabled={false}>
         {' '}
         +{' '}
       </Button>
