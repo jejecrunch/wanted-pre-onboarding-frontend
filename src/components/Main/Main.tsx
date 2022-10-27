@@ -34,9 +34,6 @@ export default function Main() {
 
   const changeMode = () => {
     setMode(mode === 'login' ? 'signup' : 'login');
-    email.value = '';
-    pw.value = '';
-    checkPw.value = '';
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,6 +57,12 @@ export default function Main() {
       }
     }
   };
+
+  useEffect(() => {
+    email.onReset();
+    pw.onReset();
+    checkPw.onReset();
+  }, [mode]);
 
   return (
     <div className="form-container">
