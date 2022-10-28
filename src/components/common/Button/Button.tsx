@@ -16,22 +16,24 @@ export default function Button({
 }: ButtonParam) {
   if (type.includes('todo')) {
     return (
-      <button
-        type="submit"
-        className={
-          type.includes('todo delete')
-            ? 'btn btn-danger ms-2'
-            : type.includes('todo modify')
-            ? 'btn btn-success ms-2'
-            : type.includes('todo cancel')
-            ? 'btn btn-light ms-2'
-            : 'btn btn-primary ms-2 mb-3'
-        }
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {children}
-      </button>
+      <div className="align-items-center">
+        <button
+          type="submit"
+          className={
+            type.includes('todo delete')
+              ? 'btn btn-danger ms-2'
+              : type.includes('todo modify')
+              ? 'btn btn-success ms-2'
+              : type.includes('todo cancel')
+              ? 'btn btn-light ms-2'
+              : 'btn btn-primary ms-2'
+          }
+          onClick={onClick}
+          disabled={disabled}
+        >
+          {children}
+        </button>
+      </div>
     );
   }
 

@@ -24,7 +24,7 @@ export default function Input({
     <div
       className={
         param.name === 'newTodo'
-          ? 'form-outline flex-fill justify-content-center'
+          ? 'flex-fill align-items-center'
           : 'form-group mt-3'
       }
     >
@@ -35,7 +35,6 @@ export default function Input({
         className="form-control"
         {...param}
       />
-      {param.name === 'newTodo' ? <label>{label}</label> : <></>}
       {!valid ? <p className="errMsg">{errMsg}</p> : <></>}
     </div>
   );

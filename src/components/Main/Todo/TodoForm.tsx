@@ -40,7 +40,7 @@ export function TodoForm({ todos, setTodos }: TodoFormParam) {
           type: 'text',
           name: 'newTodo',
         }}
-        valid={newTodo.valid}
+        valid={true}
         errMsg=""
       />
 

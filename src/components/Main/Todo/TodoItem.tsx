@@ -48,7 +48,7 @@ export function TodoItem({ todo, index, todos, setTodos }: TodoItemParam) {
 
   return (
     <li
-      className="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+      className="list-group-item d-flex align-items-center justify-contents-between border-0 mb-2 rounded"
       style={{ backgroundColor: '#f4f6f7' }}
     >
       <input
@@ -86,23 +86,22 @@ export function TodoItem({ todo, index, todos, setTodos }: TodoItemParam) {
           >
             취소
           </Button>
-          <Button type="todo modify" onClick={handleUpdate} disabled={false}>
-            수정
-          </Button>
         </>
       ) : (
         <>
-          {newTodo.isCompleted ? <s>{newTodo.todo}</s> : newTodo.todo}{' '}
-          <Button
-            type="todo modify"
-            onClick={() => setIsEdit(!isEdit)}
-            disabled={false}
-          >
-            수정
-          </Button>
+          <div className="flex-fill">
+            {newTodo.isCompleted ? <s>{newTodo.todo}</s> : newTodo.todo}{' '}
+          </div>
         </>
       )}
 
+      <Button
+        type="todo modify"
+        onClick={() => (isEdit ? handleUpdate : setIsEdit(!isEdit))}
+        disabled={false}
+      >
+        수정
+      </Button>
       <Button type="todo delete" onClick={handleDelete} disabled={false}>
         삭제
       </Button>
