@@ -1,6 +1,6 @@
 type User = {
-  email: string | null | undefined;
-  password: string | null | undefined;
+  email: string | null;
+  password: string | null;
 };
 
 type TodoParam = {
