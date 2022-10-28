@@ -3,9 +3,10 @@ import { TodoItem } from './TodoItem';
 type TodoListParam = {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  selected: Selected;
 };
 
-export function TodoList({ todos, setTodos }: TodoListParam) {
+export function TodoList({ todos, setTodos, selected }: TodoListParam) {
   return (
     <div className="todo-list-container">
       <ul className="list-group mb-0">
@@ -16,6 +17,7 @@ export function TodoList({ todos, setTodos }: TodoListParam) {
             index={i}
             key={v.id}
             setTodos={setTodos}
+            selected={selected}
           />
         ))}
       </ul>

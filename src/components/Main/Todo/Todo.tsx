@@ -10,16 +10,34 @@ import storage from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../common';
 
-async function getTodoList(
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-) {
+let base: Todo[] = [];
+
+type getTodoListParam = {
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  selected: Selected;
+};
+
+async function getTodoList({ setTodos, selected }: getTodoListParam) {
   const res = await getTodos();
 
-  if (res.status === 200) setTodos(res.data);
+  if (res.status === 200) {
+    switch (selected.cur) {
+      case 'Active':
+        setTodos([...base].filter(v => !v.isCompleted));
+        break;
+      case 'Completed':
+        setTodos([...base].filter(v => v.isCompleted));
+        break;
+      default:
+        setTodos([...res.data]);
+        base = [...res.data];
+    }
+  }
 }
 
 export default function Todo() {
   const [todos, setTodos] = useState(new Array<Todo>());
+  const [selected, setSelected] = useState({ prev: 'All', cur: 'All' });
 
   const navigate = useNavigate();
 
@@ -29,8 +47,16 @@ export default function Todo() {
     if (!token) {
       alert('로그인 되지 않았습니다 !');
       navigate('/');
-    } else getTodoList(setTodos);
+    } else {
+      getTodoList({ setTodos: setTodos, selected: selected });
+    }
   }, [token]);
+
+  useEffect(() => {
+    getTodoList({ setTodos: setTodos, selected: selected });
+  }, [selected]);
+
+  console.log(todos, base);
 
   return (
     <section className="vh-100 gradient-custom">
@@ -54,8 +80,12 @@ export default function Todo() {
                   </Button>
                 </div>
                 <TodoForm todos={todos} setTodos={setTodos} />
-                <TodoNav todos={todos} setTodos={setTodos} />
-                <TodoList todos={todos} setTodos={setTodos} />
+                <TodoNav selected={selected} setSelected={setSelected} />
+                <TodoList
+                  todos={todos}
+                  setTodos={setTodos}
+                  selected={selected}
+                />
               </div>
             </div>
           </div>

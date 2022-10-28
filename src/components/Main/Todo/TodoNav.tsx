@@ -1,52 +1,35 @@
 import { useState } from 'react';
 
 type TodoNavParam = {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  selected: { prev: string; cur: string };
+  setSelected: React.Dispatch<
+    React.SetStateAction<{ prev: string; cur: string }>
+  >;
 };
 
-export function TodoNav({ todos, setTodos }: TodoNavParam) {
-  const base = [...todos];
-
+export function TodoNav({ selected, setSelected }: TodoNavParam) {
+  let pre = 'All';
   const [tabs] = useState([
     {
       name: 'All',
       onClick: () => {
-        setTodos(base);
-        tabs[0].active = !tabs[0].active;
-
-        if (tabs[0].active) {
-          tabs[1].active = false;
-          tabs[2].active = false;
-        }
+        setSelected({ prev: pre, cur: 'All' });
+        pre = 'All';
       },
-      active: true,
     },
     {
       name: 'Active',
       onClick: () => {
-        setTodos(base.filter(v => !v.isCompleted));
-        tabs[1].active = !tabs[1].active;
-
-        if (tabs[1].active) {
-          tabs[0].active = false;
-          tabs[2].active = false;
-        }
+        setSelected({ prev: pre, cur: 'Active' });
+        pre = 'Active';
       },
-      active: false,
     },
     {
       name: 'Completed',
       onClick: () => {
-        setTodos(base.filter(v => v.isCompleted));
-        tabs[2].active = !tabs[2].active;
-
-        if (tabs[2].active) {
-          tabs[0].active = false;
-          tabs[1].active = false;
-        }
+        setSelected({ prev: pre, cur: 'Completed' });
+        pre = 'Completed';
       },
-      active: false,
     },
   ]);
 
@@ -55,7 +38,7 @@ export function TodoNav({ todos, setTodos }: TodoNavParam) {
       {tabs.map(v => (
         <li className="nav-item" key={v.name}>
           <button
-            className={v.active ? 'nav-link active' : 'nav-link'}
+            className={selected.cur === v.name ? 'nav-link active' : 'nav-link'}
             onClick={v.onClick}
           >
             {v.name}

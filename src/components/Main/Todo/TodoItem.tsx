@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import { Button, Input } from '../../common';
-import { deleteTodo, updateTodo } from '../../services';
+import { deleteTodo, getTodos, updateTodo } from '../../services';
 
 type TodoItemParam = {
   todo: Todo;
   index: number;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  selected: Selected;
 };
 
-export function TodoItem({ todo, index, todos, setTodos }: TodoItemParam) {
+export function TodoItem({
+  todo,
+  index,
+  todos,
+  setTodos,
+  selected,
+}: TodoItemParam) {
   const [newTodo, setNewTodo] = useState(todo);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -20,6 +27,22 @@ export function TodoItem({ todo, index, todos, setTodos }: TodoItemParam) {
       todo: newTodo.todo,
       isCompleted: e.target.checked,
     });
+
+    const res = await getTodos();
+
+    if (res.status === 200) {
+      switch (selected.cur) {
+        case 'Active':
+          setTodos([...res.data].filter(v => !v.isCompleted));
+          break;
+        case 'Completed':
+          setTodos([...res.data].filter(v => v.isCompleted));
+          break;
+      }
+    }
+
+    if (selected.cur === 'Active' || selected.cur === 'Completed')
+      setTodos([...todos.slice(0, index), ...todos.slice(index + 1)]);
   };
 
   const handleUpdate = async (e: React.MouseEvent<HTMLButtonElement>) => {
