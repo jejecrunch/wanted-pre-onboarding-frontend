@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { getTodos } from '../../services';
-import { TodoForm } from './TodoForm';
-import { TodoList } from './TodoList';
-import { TodoNav } from './TodoNav';
+import { TodoForm, TodoList, TodoNav } from '../../components/Todo';
 
 import './Todo.scss';
 import storage from '../../services/store';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../common';
+import { Button } from '../../components/common';
 
 let base: Todo[] = [];
 

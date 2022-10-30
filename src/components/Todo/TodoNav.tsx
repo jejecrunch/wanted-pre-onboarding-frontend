@@ -7,7 +7,7 @@ type TodoNavParam = {
   >;
 };
 
-export function TodoNav({ selected, setSelected }: TodoNavParam) {
+export default function TodoNav({ selected, setSelected }: TodoNavParam) {
   let pre = 'All';
   const [tabs] = useState([
     {

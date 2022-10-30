@@ -1,4 +1,4 @@
-import { TodoItem } from './TodoItem';
+import TodoItem from './TodoItem';
 
 type TodoListParam = {
   todos: Todo[];
@@ -6,7 +6,7 @@ type TodoListParam = {
   selected: Selected;
 };
 
-export function TodoList({ todos, setTodos, selected }: TodoListParam) {
+export default function TodoList({ todos, setTodos, selected }: TodoListParam) {
   return (
     <div className="todo-list-container">
       <ul className="list-group mb-0">

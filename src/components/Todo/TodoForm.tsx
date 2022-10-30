@@ -1,5 +1,5 @@
-import { useInput } from '../../../hooks';
-import { Button, Input } from '../../common';
+import { useInput } from '../../hooks';
+import { Button, Input } from '../common';
 import { addTodo } from '../../services';
 
 type TodoFormParam = {
@@ -7,7 +7,7 @@ type TodoFormParam = {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-export function TodoForm({ todos, setTodos }: TodoFormParam) {
+export default function TodoForm({ todos, setTodos }: TodoFormParam) {
   const newTodo = useInput({
     initVal: '',
     validation: v => typeof v === 'string',

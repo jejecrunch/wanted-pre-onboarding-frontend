@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input } from '../../common';
+import { Button, Input } from '../common';
 import { deleteTodo, getTodos, updateTodo } from '../../services';
 
 type TodoItemParam = {
@@ -10,7 +10,7 @@ type TodoItemParam = {
   selected: Selected;
 };
 
-export function TodoItem({
+export default function TodoItem({
   todo,
   index,
   todos,
