@@ -81,6 +81,7 @@ export default function TodoItem({
         aria-label="..."
         onChange={handleChange}
         checked={newTodo.isCompleted}
+        id={`todo${newTodo.id}`}
       />
       {isEdit ? (
         <>
@@ -111,11 +112,11 @@ export default function TodoItem({
           </Button>
         </>
       ) : (
-        <>
-          <div className="flex-fill">
+        <div className="flex-fill">
+          <label className="form-check-label" htmlFor={`check${newTodo.id}`}>
             {newTodo.isCompleted ? <s>{newTodo.todo}</s> : newTodo.todo}{' '}
-          </div>
-        </>
+          </label>
+        </div>
       )}
 
       <Button

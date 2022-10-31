@@ -64,18 +64,6 @@ export default function Main() {
     checkPw.onReset();
   }, [mode]);
 
-  // true가 나와야 함
-
-  console.log(
-    (email.value.length === 0 && email.valid) ||
-      (pw.value.length === 0 && pw.valid),
-    email.value.length,
-    email.valid,
-    pw.value.length,
-    pw.valid,
-    pw.value.length === 0 && pw.valid
-  );
-
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>

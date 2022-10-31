@@ -22,7 +22,8 @@ export default function TodoForm({ todos, setTodos }: TodoFormParam) {
       setTodos([...todos, res.data]);
       newTodo.onReset();
     } else {
-      console.log(res);
+      alert(`다음과 같은 에러가 발생했습니다 !
+      ${res}`);
     }
   };
 

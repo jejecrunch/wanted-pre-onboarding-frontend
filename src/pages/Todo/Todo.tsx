@@ -6,7 +6,7 @@ import { TodoForm, TodoList, TodoNav } from '../../components/Todo';
 import './Todo.scss';
 import storage from '../../services/store';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components/common';
+import { Button, Loading } from '../../components/common';
 
 let base: Todo[] = [];
 
@@ -54,8 +54,6 @@ export default function Todo() {
     getTodoList({ setTodos: setTodos, selected: selected });
   }, [selected]);
 
-  console.log(todos, base);
-
   return (
     <section className="vh-100 gradient-custom">
       <div className="container py-5 h-100">
@@ -67,7 +65,6 @@ export default function Todo() {
                   <Button
                     type="logout"
                     onClick={() => {
-                      console.log('!!!');
                       confirm('로그아웃하시겠습니까?');
                       storage.remove('token');
                       navigate('/');
@@ -79,11 +76,15 @@ export default function Todo() {
                 </div>
                 <TodoForm todos={todos} setTodos={setTodos} />
                 <TodoNav selected={selected} setSelected={setSelected} />
-                <TodoList
-                  todos={todos}
-                  setTodos={setTodos}
-                  selected={selected}
-                />
+                {todos.length > 0 ? (
+                  <TodoList
+                    todos={todos}
+                    setTodos={setTodos}
+                    selected={selected}
+                  />
+                ) : (
+                  <Loading />
+                )}
               </div>
             </div>
           </div>
