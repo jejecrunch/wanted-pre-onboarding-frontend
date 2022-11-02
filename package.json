@@ -1,7 +1,7 @@
 {
   "name": "wanted-pre-onboarding-frontend",
-  "version": "0.1.0",
   "homepage": "https://jejecrunch.github.io/wanted-pre-onboarding-frontend",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -15,6 +15,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "axios": "^1.1.3",
+    "axios-extensions": "^3.1.6",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",
